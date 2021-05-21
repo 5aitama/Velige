@@ -17,7 +17,7 @@ This Graphics Engine is based on WebGL1 *(not compatible with WebGL2 for now)*. 
 
 I use [TypeScript](https://www.typescriptlang.org/) especially for typed data *(is very very lot more easier to code with typed data!)* with [Snowpack](https://www.snowpack.dev/) to build / debug the project (*very useful !*). 
 
-For the package manager I use [Yarn](https://yarnpkg.com/) for speed and it have a better package management compared to [NPM](https://www.npmjs.com/) (sorry for NPM users) but you can use both.
+For the package manager I use [Yarn](https://yarnpkg.com/) for speed and better package management compared to [NPM](https://www.npmjs.com/) (sorry for NPM users) but you can use both.
 
 ### How to build
 To build the project you must :
