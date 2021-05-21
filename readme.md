@@ -1,7 +1,14 @@
 
-
 <h1 align=center>Velige</h1>
 <p align=center>A Very Little Graphic Engine</p>
+
+<p align=center>
+<img alt="GitHub package.json version (branch)" src="https://img.shields.io/github/package-json/v/5aitama/velige/main?label=version">
+<img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/5aitama/velige">
+<img alt="GitHub closed pull requests" src="https://img.shields.io/github/issues-pr-closed/5aitama/velige">
+<img alt="GitHub contributors" src="https://img.shields.io/github/contributors/5aitama/velige">
+<img alt="GitHub last commit (branch)" src="https://img.shields.io/github/last-commit/5aitama/velige/main">
+</p>
 
 ### Description
 **Velige** is a little Graphics Engine created especially for a school project (*a game named [CodeCar]()*). Why ? because I like suffering... Seriously the reason why I make this is because I want to learn more about how game engines work the best way for me to learn how they work is to create one. 
