@@ -19,7 +19,7 @@ export default class TypedData {
      * Create new instance of `TypedData`.
      * @param value The value.
      * @param type The type
-     * @param size The size (in bytes)
+     * @param size The size *(in bytes)*
      */
     constructor(value: number, type: DataType) {
         this._value = value;
