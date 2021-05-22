@@ -5,15 +5,15 @@ import { Vertex } from "./Vertex";
 /**
  * Represent a Mesh.
  */
-export class Mesh<V extends Vertex, I extends Indices, S extends Shader> {
+export class Mesh {
     /** The mesh vertices */
-    private _vertices: V[];
+    private _vertices: Vertex[];
 
     /** The mesh indices */
-    private _indices: I[];
+    private _indices: Indices[];
 
     /** The mesh shader */
-    private _shader: S;
+    private _shader: Shader;
 
     /**
      * Create new instance of `Mesh`.
@@ -21,7 +21,7 @@ export class Mesh<V extends Vertex, I extends Indices, S extends Shader> {
      * @param indices The mesh indices
      * @param shader The mesh shader
      */
-    constructor(vertices: V[], indices: I[], shader: S) {
+    constructor(vertices: Vertex[], indices: Indices[], shader: Shader) {
         this._vertices = vertices;
         this._indices = indices;
         this._shader = shader;
