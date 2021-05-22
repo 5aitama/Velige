@@ -97,8 +97,11 @@ export class VertexAttribute {
     }
 }
 
+/**
+ * A vertex representation.
+ */
 export class Vertex implements ISized {
-    /** The vertex vectors. */
+    /** The vertex vectors (or vertex data). */
     private _vectors: Vector[];
 
     /** The vertex size *(in bytes)* */
@@ -142,25 +145,24 @@ export class Vertex implements ISized {
     }
 
     /**
-     * Create an array vertex attributes from a vertex.
-     * @param vertex The vertex.
-     * @returns An array of `VertexAttribute`
+     * Build an array of `VertexAttribute` from the current `Vertex`.
+     * @returns The vertex attributes.
      */
-    public static CreateVertexAttributes<T extends Vertex>(vertex: T) {
+    public buildVertexAttributes() {
         let offset = 0;
         const attributes: VertexAttribute[] = [];
 
-        for(let i = 0; i < vertex.vectors.length; i++) {
+        for(let i = 0; i < this.vectors.length; i++) {
             const attribute = new VertexAttribute(
                 i, 
-                vertex.vectors[i].data.length, 
-                vertex.vectors[i].type,
+                this.vectors[i].data.length, 
+                this.vectors[i].type,
                 false,
-                vertex.size, 
+                this.size, 
                 offset
             );
 
-            offset += vertex.vectors[i].size;
+            offset += this.vectors[i].size;
             attributes.push(attribute);
         }
 
