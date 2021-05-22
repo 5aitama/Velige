@@ -1,13 +1,20 @@
 import { BufferUsage } from "../GPUBuffer";
-import { Indices } from "../Graphics/Indices";
 import IndicesBuffer from "../Graphics/IndicesBuffer";
 import { Mesh } from "../Graphics/Mesh";
-import { Vertex, VertexAttribute } from "../Graphics/Vertex";
+import { VertexAttribute } from "../Graphics/Vertex";
 import VertexBuffer from "../Graphics/VertexBuffer";
 
+/**
+ * Data that we need to render a mesh.
+ */
 export interface IMeshRenderData {
-    vertexBuffer: VertexBuffer<Vertex>,
-    indexBuffer: IndicesBuffer<Indices>,
+    /** The vertex buffer */
+    vertexBuffer: IMeshBuffer,
+
+    /** The index buffer */
+    indexBuffer: IMeshBuffer,
+
+    /** The vertex attributes */
     vertexAttributes: VertexAttribute[],
 }
 
@@ -126,7 +133,7 @@ export default class SceneRenderer {
     render() {
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
         this._gl.clearColor(0.1, 0.1, 0.1, 1);
-        
+
         for(let i = 0; i < this.meshes.length; i++) {
             this.meshes[i].shader.use(this._gl);
             this.meshesRenderData[i].indexBuffer.bindBuffer();
