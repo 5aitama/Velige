@@ -1,6 +1,5 @@
 import { setTypedData } from "../Core/DataViewUtils";
 import { BufferTarget, BufferUsage } from "../GPUBuffer";
-import { DataType } from "../types";
 import Buffer from "./Buffer";
 import { Vertex } from "./Vertex";
 
@@ -91,7 +90,6 @@ export default class VertexBuffer<T extends Vertex> {
         
         for(let i = 0; i < this._vertices.length; i++) {
             for(let j = 0; j < this._vertices[i].vectors.length; j++) {
-                const dataType = this._vertices[i].vectors[j].type;
                 for(let k = 0; k < this._vertices[i].vectors[j].data.length; k++) {
                     setTypedData(offset, this._vertices[i].vectors[j].data[k], view);
                     offset += this._vertices[i].vectors[j].data[k].size;
