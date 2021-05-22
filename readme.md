@@ -21,7 +21,18 @@ I use [TypeScript](https://www.typescriptlang.org/) especially for typed data *(
 For the package manager I use [Yarn](https://yarnpkg.com/) for speed and better package management compared to [NPM](https://www.npmjs.com/) (sorry for NPM users) but you can use both.
 
 ## How to build
-To build the project you must :
+You must first install the dependencies (if not already done) with :
+```bash
+# For yarn users
+yarn install
+```
+
+```bash
+# For npm users
+npm install
+```
+
+And then to build the project you must :
 
 ```bash
 # For yarn users
@@ -37,6 +48,8 @@ once it finished to build, you must need have a `build/` folder at the project r
 
 ### How to dev
 When you modify the code you want to see in real time (when you saved the file that you are modified) the modification. You can't use the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension for [Visual Studio Code](https://code.visualstudio.com/) for that but hopefuly we have [Snowpack](https://www.snowpack.dev/). Just do :
+
+**(You must first install the dependencies)**
 
 ```bash
 # For yarn users
