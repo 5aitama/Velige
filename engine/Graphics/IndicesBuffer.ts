@@ -7,7 +7,7 @@ import { setTypedData } from "../Core/DataViewUtils";
  * Class that help us to transform
  * a `Indices` to a `Buffer`.
  */
- export default class IndicesBuffer<T extends Indices> {
+ export default class IndicesBuffer<T extends Indices> implements IMeshBuffer {
     /** The indices. */
     private _indices: T[];
 

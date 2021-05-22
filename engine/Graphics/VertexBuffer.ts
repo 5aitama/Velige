@@ -7,7 +7,7 @@ import { Vertex } from "./Vertex";
  * Class that help us to transform
  * a `Vertex` to a `Buffer`.
  */
-export default class VertexBuffer<T extends Vertex> {
+export default class VertexBuffer<T extends Vertex> implements IMeshBuffer {
     /** The vertices. */
     private _vertices: T[];
 
