@@ -9,8 +9,9 @@
 <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/5aitama/velige">
 <img alt="GitHub last commit (branch)" src="https://img.shields.io/github/last-commit/5aitama/velige/main">
 </p>
+<br />
 
-### Description
+## Description
 **Velige** is a little Graphics Engine created especially for a school project (*a game named [CodeCar]()*). Why ? because I like suffering... Seriously the reason why I make this is because I want to learn more about how game engines work the best way for me to learn how they work is to create one. 
 
 This Graphics Engine is based on WebGL1 *(not compatible with WebGL2 for now)*. The code is quite well commented for me (I hope is the same for you) so you can see how the Graphics Engine works without too much trouble.
@@ -19,7 +20,7 @@ I use [TypeScript](https://www.typescriptlang.org/) especially for typed data *(
 
 For the package manager I use [Yarn](https://yarnpkg.com/) for speed and better package management compared to [NPM](https://www.npmjs.com/) (sorry for NPM users) but you can use both.
 
-### How to build
+## How to build
 To build the project you must :
 
 ```bash
