@@ -138,7 +138,7 @@ export default class SceneRenderer {
             this.meshes[i].shader.use(this._gl);
             this.meshesRenderData[i].indexBuffer.bindBuffer();
             this._gl.drawElements(
-                this._gl.TRIANGLES, 
+                this.meshes[i].drawMode, 
                 this.meshes[i].indices.length * 3, 
                 this.meshes[i].indices[0].indices.type, 
                 0
