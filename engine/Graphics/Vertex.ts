@@ -95,6 +95,22 @@ export class VertexAttribute {
     get normalized() {
         return this._normalized;
     }
+
+    /**
+     * Enable the current vertex attributes.
+     */
+    enable(gl: WebGLRenderingContext) {
+        gl.vertexAttribPointer(
+            this._index, 
+            this._size, 
+            this._type, 
+            this._normalized, 
+            this._stride, 
+            this._offset
+        );
+        
+        gl.enableVertexAttribArray(this._index);
+    }
 }
 
 /**

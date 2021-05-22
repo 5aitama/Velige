@@ -109,4 +109,12 @@ export enum ShaderType {
 
         return new Shader(sources[0], sources[1]);
     }
+
+    /**
+     * Use the current shader.
+     * @param gl The context.
+     */
+    use(gl: WebGLRenderingContext) {
+        gl.useProgram(this);
+    }
  }

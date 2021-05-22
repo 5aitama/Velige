@@ -100,4 +100,18 @@ export default class VertexBuffer<T extends Vertex> {
         return bufferArray;
     }
 
+    /**
+     * Simply bind the buffer.
+     */
+    bindBuffer() {
+        this._gl.bindBuffer(BufferTarget.Array, this._buffer);
+    }
+
+    /**
+     * Safely delete the buffer.
+     */
+    deleteBuffer() {
+        this._buffer.deleteBuffer(this._gl);
+    }
+
 }

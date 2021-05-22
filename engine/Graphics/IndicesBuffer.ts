@@ -95,4 +95,18 @@ import { setTypedData } from "../Core/DataViewUtils";
         return bufferArray;
     }
 
+    /**
+     * Simply bind the buffer.
+     */
+    bindBuffer() {
+        this._gl.bindBuffer(BufferTarget.Element, this._buffer);
+    }
+
+    /**
+     * Safely delete the buffer.
+     */
+    deleteBuffer() {
+        this._buffer.deleteBuffer(this._gl);
+    }
+
 }

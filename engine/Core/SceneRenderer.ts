@@ -1,4 +1,15 @@
+import { BufferUsage } from "../GPUBuffer";
+import { Indices } from "../Graphics/Indices";
+import IndicesBuffer from "../Graphics/IndicesBuffer";
 import { Mesh } from "../Graphics/Mesh";
+import { Vertex, VertexAttribute } from "../Graphics/Vertex";
+import VertexBuffer from "../Graphics/VertexBuffer";
+
+export interface IMeshRenderData {
+    vertexBuffer: VertexBuffer<Vertex>,
+    indexBuffer: IndicesBuffer<Indices>,
+    vertexAttributes: VertexAttribute[],
+}
 
 /**
  * The scene renderer.
@@ -12,6 +23,9 @@ export default class SceneRenderer {
 
     /** The meshes to be render */
     private meshes: Mesh[] = [];
+
+    /** The render data of each meshes */
+    private meshesRenderData: IMeshRenderData[] = [];
 
     /**
      * Create new instance of `SceneRenderer`.
@@ -58,7 +72,36 @@ export default class SceneRenderer {
             return;
         }
 
+        // Check if the mesh shader was compiled
+        if(!mesh.shader.isCompiled) {
+            mesh.shader.compileAndLink(this._gl);
+        }
+
+        // Create the index buffer from the mesh indices.
+        const iBuffer = new IndicesBuffer(this._gl, mesh.indices, BufferUsage.Static);
+
+        // Create the vertex buffer from the mesh vertices.
+        const vBuffer = new VertexBuffer(this._gl, mesh.vertices, BufferUsage.Static);
+
+        // Create the vertex attributes from the mesh vertices.
+        const vAttribs = mesh.vertices[0].buildVertexAttributes();
+
+        // Bind the vertex buffer and set the vertex attributes
+        // on it!
+        vBuffer.bindBuffer();
+
+        for(let i = 0; i < vAttribs.length; i++) {
+            vAttribs[i].enable(this._gl);
+        }
+
+        const meshRenderData: IMeshRenderData = {
+            indexBuffer: iBuffer,
+            vertexBuffer: vBuffer,
+            vertexAttributes: vAttribs,
+        }
+
         this.meshes.push(mesh);
+        this.meshesRenderData.push(meshRenderData);
     }
 
     /**
@@ -72,10 +115,27 @@ export default class SceneRenderer {
             return;
         }
 
+        // Safely delete the mesh buffers...
+        this.meshesRenderData[index].vertexBuffer.deleteBuffer();
+        this.meshesRenderData[index].indexBuffer.deleteBuffer();
+
         this.meshes.splice(index, 1);
+        this.meshesRenderData.splice(index, 1);
     }
 
     render() {
-
+        this._gl.clear(this._gl.COLOR_BUFFER_BIT);
+        this._gl.clearColor(0.1, 0.1, 0.1, 1);
+        
+        for(let i = 0; i < this.meshes.length; i++) {
+            this.meshes[i].shader.use(this._gl);
+            this.meshesRenderData[i].indexBuffer.bindBuffer();
+            this._gl.drawElements(
+                this._gl.TRIANGLES, 
+                this.meshes[i].indices.length * 3, 
+                this.meshes[i].indices[0].indices.type, 
+                0
+            );
+        }
     }
 }
