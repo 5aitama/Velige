@@ -42,6 +42,18 @@ async function setup() {
     const shader = await Shader.loadFrom("shaders/simple.vert", "shaders/simple.frag");
     const mesh = new Mesh(vertices, indices, shader);
     renderer.addMesh(mesh);
+
+    window.onkeydown = (ev: KeyboardEvent) => {
+        if(ev.key === 'r') {
+            console.log("remove mesh");
+            renderer.removeMesh(mesh);
+        }
+
+        if(ev.key === 'a') {
+            console.log("add mesh");
+            renderer.addMesh(mesh);
+        }
+    }
 }
 
 function render() {
