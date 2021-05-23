@@ -1,4 +1,4 @@
-import { DataType } from "../types";
+import { DataType } from "./types";
 import TypedData from "./TypedData";
 
 /**
@@ -35,5 +35,5 @@ export function setTypedData(offset: number, data: TypedData, view: DataView) {
             break;
     }
 
-    return offset + data.size;
+    return data.size;
 }

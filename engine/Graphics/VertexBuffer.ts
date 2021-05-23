@@ -1,5 +1,5 @@
 import { setTypedData } from "../Core/DataViewUtils";
-import { BufferTarget, BufferUsage } from "../GPUBuffer";
+import { BufferTarget, BufferUsage } from "./Buffer";
 import Buffer from "./Buffer";
 import { Vertex } from "./Vertex";
 
@@ -104,7 +104,7 @@ export default class VertexBuffer<T extends Vertex> implements IMeshBuffer {
      * Simply bind the buffer.
      */
     bindBuffer() {
-        this._gl.bindBuffer(BufferTarget.Array, this._buffer);
+        this._buffer.bindBuffer(this._gl, BufferTarget.Array);
     }
 
     /**

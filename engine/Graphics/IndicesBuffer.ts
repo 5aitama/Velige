@@ -1,6 +1,6 @@
 import { Indices } from "./Indices";
 import Buffer from "./Buffer";
-import { BufferTarget, BufferUsage } from "../GPUBuffer";
+import { BufferTarget, BufferUsage } from "./Buffer";
 import { setTypedData } from "../Core/DataViewUtils";
 
 /**
@@ -88,7 +88,7 @@ import { setTypedData } from "../Core/DataViewUtils";
         
         for(let i = 0; i < this._indices.length; i++) {
             for(let j = 0; j < this._indices[i].indices.data.length; j++) {
-                offset += setTypedData(offset, this._indices[i].indices.data[j], view);
+                offset += setTypedData(offset, this._indices[i].indices.data[j], view);            
             }
         }
 
@@ -99,9 +99,8 @@ import { setTypedData } from "../Core/DataViewUtils";
      * Simply bind the buffer.
      */
     bindBuffer() {
-        this._gl.bindBuffer(BufferTarget.Element, this._buffer);
+        this._buffer.bindBuffer(this._gl, BufferTarget.Element);
     }
-
     /**
      * Safely delete the buffer.
      */

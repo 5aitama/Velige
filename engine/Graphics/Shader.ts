@@ -115,6 +115,6 @@ export enum ShaderType {
      * @param gl The context.
      */
     use(gl: WebGLRenderingContext) {
-        gl.useProgram(this);
+        gl.useProgram(this.program);
     }
  }

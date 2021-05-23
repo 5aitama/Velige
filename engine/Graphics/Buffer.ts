@@ -1,5 +1,20 @@
-import { BufferTarget, BufferUsage } from "../GPUBuffer";
-import { DataType } from "../types";
+import { DataType } from "../Core/types";
+
+/**
+ * GPU buffer target.
+ */
+export enum BufferTarget {
+    Array = WebGLRenderingContext['ARRAY_BUFFER'],
+    Element = WebGLRenderingContext['ELEMENT_ARRAY_BUFFER'],
+}
+
+/**
+ * GPU buffer usage.
+ */
+export enum BufferUsage {
+    Static = WebGLRenderingContext['STATIC_DRAW'],
+    Dynamic = WebGLRenderingContext['DYNAMIC_DRAW'],
+}
 
 /**
  * This class is a abstraction of `WebGLBuffer` and
@@ -138,5 +153,14 @@ export default class Buffer {
 
         gl.bindBuffer(this._target, this._rawBuffer);
         gl.bufferSubData(this._target, offset, data);
+    }
+
+    /**
+     * Bind the buffer.
+     * @param gl The context.
+     * @param target The buffer target.
+     */
+    bindBuffer(gl: WebGLRenderingContext, target: BufferTarget) {
+        gl.bindBuffer(target, this._rawBuffer);
     }
 }

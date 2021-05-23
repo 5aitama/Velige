@@ -1,6 +1,6 @@
 import ISized from "../Core/ISized";
 import { Vector } from "../Math/Vector";
-import { DataType } from "../types";
+import { DataType } from "../Core/types";
 
 /**
  * Little wrapper of WebGL `VertexAttribute`. It contain

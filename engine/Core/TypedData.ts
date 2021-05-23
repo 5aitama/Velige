@@ -1,4 +1,4 @@
-import { DataType, sizeOfDataType } from "../types";
+import { DataType, sizeOfDataType } from "./types";
 
 /**
  * Represent a typed data. I don't know if it

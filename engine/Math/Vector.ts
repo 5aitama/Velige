@@ -1,6 +1,6 @@
 import ISized from "../Core/ISized";
 import TypedData from "../Core/TypedData";
-import { DataType } from "../types";
+import { DataType } from "../Core/types";
 
 /**
  * The base class of all `Vector` classes.

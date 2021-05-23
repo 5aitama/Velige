@@ -1,4 +1,4 @@
-import { BufferUsage } from "../GPUBuffer";
+import { BufferUsage } from "../Graphics/Buffer";
 import IndicesBuffer from "../Graphics/IndicesBuffer";
 import { Mesh } from "../Graphics/Mesh";
 import { VertexAttribute } from "../Graphics/Vertex";
