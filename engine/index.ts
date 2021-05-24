@@ -6,7 +6,6 @@ import Shader from "./Graphics/Shader.js";
 import { Vertex } from "./Graphics/Vertex.js";
 import { Vector2, Vector3, Vector4 } from "./Math/Vector.js";
 import { DataType } from "./Core/types.js";
-import { Matrix, Matrix4x4 } from "./Math/Matrix.js";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 
