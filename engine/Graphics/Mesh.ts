@@ -1,4 +1,5 @@
 import { Indices } from "./Indices";
+import Material from "./Material";
 import Shader from "./Shader";
 import { Vertex } from "./Vertex";
 
@@ -22,8 +23,8 @@ export class Mesh {
     /** The mesh indices */
     private _indices: Indices[];
 
-    /** The mesh shader */
-    private _shader: Shader;
+    /** The mesh material */
+    private _material: Material;
 
     /** How to draw the geometry from the indices. */
     private _drawMode: DrawMode = DrawMode.Triangle;
@@ -32,13 +33,13 @@ export class Mesh {
      * Create new instance of `Mesh`.
      * @param vertices The mesh vertices
      * @param indices The mesh indices
-     * @param shader The mesh shader
+     * @param material The mesh material
      * @param renderMode How to draw the mesh geometry from the indices.
      */
-    constructor(vertices: Vertex[], indices: Indices[], shader: Shader, renderMode = DrawMode.Triangle) {
+    constructor(vertices: Vertex[], indices: Indices[], material: Material, renderMode = DrawMode.Triangle) {
         this._vertices = vertices;
         this._indices = indices;
-        this._shader = shader;
+        this._material = material;
         this._drawMode = renderMode;
     }
 
@@ -52,9 +53,9 @@ export class Mesh {
         return this._indices;
     }
 
-    /** The mesh shader */
-    get shader() {
-        return this._shader;
+    /** The mesh material */
+    get material() {
+        return this._material;
     }
 
     /** The draw mode */
