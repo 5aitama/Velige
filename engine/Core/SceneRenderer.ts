@@ -80,8 +80,8 @@ export default class SceneRenderer {
         }
 
         // Check if the mesh shader was compiled
-        if(!mesh.shader.isCompiled) {
-            mesh.shader.compileAndLink(this._gl);
+        if(!mesh.material.shader.isCompiled) {
+            mesh.material.shader.compileAndLink(this._gl);
         }
 
         // Create the index buffer from the mesh indices.
@@ -135,7 +135,7 @@ export default class SceneRenderer {
         this._gl.clearColor(0.1, 0.1, 0.1, 1);
 
         for(let i = 0; i < this.meshes.length; i++) {
-            this.meshes[i].shader.use(this._gl);
+            this.meshes[i].material.use(this._gl);
             this.meshesRenderData[i].indexBuffer.bindBuffer();
             this._gl.drawElements(
                 this.meshes[i].drawMode, 
