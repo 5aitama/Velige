@@ -3,16 +3,12 @@ import TypedData from "../Core/TypedData";
 import { DataType } from "../Core/types";
 import { Vector, Vector3, Vector4 } from "./Vector";
 
-interface IMatrix {
-    
-}
-
 /**
  * The base class of all `Matrix` classes.
  * All `Matrix` classes need to extends this
  * class.
  */
-export class Matrix<V extends Vector> implements ISized, IMatrix {
+export class Matrix<V extends Vector> implements ISized {
     /** The matrix data */
     private _data: TypedData[];
 
@@ -204,6 +200,20 @@ export class Matrix4x4 extends Matrix<Vector4> {
 
         super(typedData, 4, 4);
     }
+
+    /**
+     * Create a identity matrix.
+     * @param type The type of each matrix data.
+     * @returns A 4x4 identity matrix.
+     */
+     identity(type: DataType) {
+        return new Matrix4x4([
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1,
+        ], type);
+    }
 }
 
 /**
@@ -224,5 +234,18 @@ export class Matrix4x4 extends Matrix<Vector4> {
         }
 
         super(typedData, 3, 3);
+    }
+
+    /**
+     * Create a identity matrix.
+     * @param type The type of each matrix data.
+     * @returns A 3x3 identity matrix.
+     */
+    identity(type: DataType) {
+        return new Matrix3x3([
+            1, 0, 0,
+            0, 1, 0,
+            0, 0, 1,
+        ], type);
     }
 }
