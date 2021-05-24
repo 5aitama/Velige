@@ -43,6 +43,16 @@ export default class Material {
         this._shader = shader;
     }
 
+    /** The shader. */
+    public get shader() {
+        return this._shader;
+    }
+
+    /** The material uniforms data. */
+    public get uniforms() {
+        return this._uniforms;
+    }
+
     /**
      * Set an uniform data that would be a float.
      * @param gl The context.
