@@ -12,7 +12,7 @@ export class Vector implements ISized {
     private _data: TypedData[];
 
     /** The size of the current `Vector` *(in bytes)* */
-    private _size: number;
+    private _size: number = 0;
 
     /** The data type in this `Vector`. */
     private _type: DataType = 0;
@@ -23,7 +23,6 @@ export class Vector implements ISized {
      */
     constructor(data: TypedData[]) {
         this._data = data;
-        this._size = 0;
         this.recalculateSize();
     }
 
@@ -88,6 +87,86 @@ export class Vector implements ISized {
     protected updateDataItem(index: number, value: number) {
         this._data[index].value = value;
     }
+
+    /**
+     * Perform a dot product between two vector.
+     * @param a The right hand side vector.
+     * @param b The left hand size vector.
+     * @returns The result of a • b.
+     */
+    public static dot<T extends Vector>(a: T, b: T) : TypedData {
+        let result = new TypedData(0, a.type);
+
+        for(let i = 0; i < a.data.length; i++) {
+            result.value += a.data[i].value * b.data[i].value;
+        }
+
+        return result;
+    }
+
+    /**
+     * Perform an addition of two vector.
+     * @param a The right hand side vector.
+     * @param b The left hand size vector.
+     * @returns The result of a + b.
+     */
+    public static add<T extends Vector>(a: T, b: T) : T {
+        const data: TypedData[] = new Array(a.data.length);
+
+        for(let i = 0; i < a.data.length; i++) {
+            data[i] = new TypedData(a.data[i].value + b.data[i].value, a.data[i].type);
+        }
+
+        return new Vector(data) as T;
+    }
+
+    /**
+     * Perform a substraction of two vector.
+     * @param a The right hand side vector.
+     * @param b The left hand size vector.
+     * @returns The result of a - b.
+     */
+    public static sub<T extends Vector>(a: T, b: T) : T {
+        const data: TypedData[] = new Array(a.data.length);
+
+        for(let i = 0; i < a.data.length; i++) {
+            data[i] = new TypedData(a.data[i].value - b.data[i].value, a.data[i].type);
+        }
+
+        return new Vector(data) as T;
+    }
+
+    /**
+     * Perform a multiplication of two vector.
+     * @param a The right hand side vector.
+     * @param b The left hand size vector.
+     * @returns The result of a * b.
+     */
+    public static mul<T extends Vector>(a: T, b: T) : T {
+        const data: TypedData[] = new Array(a.data.length);
+
+        for(let i = 0; i < a.data.length; i++) {
+            data[i] = new TypedData(a.data[i].value * b.data[i].value, a.data[i].type);
+        }
+
+        return new Vector(data) as T;
+    }
+
+    /**
+     * Perform a division of two vector.
+     * @param a The right hand side vector.
+     * @param b The left hand size vector.
+     * @returns The result of a / b.
+     */
+    public static div<T extends Vector>(a: T, b: T) : T {
+        const data: TypedData[] = new Array(a.data.length);
+
+        for(let i = 0; i < a.data.length; i++) {
+            data[i] = new TypedData(a.data[i].value / b.data[i].value, a.data[i].type);
+        }
+
+        return new Vector(data) as T;
+    }
 }
 
 /**
@@ -100,11 +179,18 @@ export class Vector2 extends Vector {
      * @param y The `y` component value of the vector.
      * @param type The type of each components value of the vector.
      */
-    constructor(x: number, y: number, type: DataType) {
-        super([
-            new TypedData(x, type), 
-            new TypedData(y, type),
-        ]);
+    constructor(x: number | TypedData[], y?: number, type?: DataType) {
+        if(Array.isArray(x)) {
+            super(x);
+        } else {
+            if(y === undefined || type === undefined) {
+                throw new Error("You need to provide the Y value and the type!");
+            }
+            super([
+                new TypedData(x, type), 
+                new TypedData(y, type),
+            ]);
+        }
     }
 
     /** The `x` component of the vector */
@@ -135,12 +221,19 @@ export class Vector2 extends Vector {
      * @param z The `z` component value of the vector.
      * @param type The type of each components value of the vector.
      */
-    constructor(x: number, y: number, z: number, type: DataType) {
-        super([
-            new TypedData(x, type), 
-            new TypedData(y, type),
-            new TypedData(z, type),
-        ]);
+    constructor(x: number | TypedData[], y?: number, z?: number, type?: DataType) {
+        if(Array.isArray(x)) {
+            super(x);
+        } else {
+            if(y === undefined || z === undefined || type === undefined) {
+                throw new Error("You need to provide the Y value, Z value and the type!");
+            }
+            super([
+                new TypedData(x, type), 
+                new TypedData(y, type),
+                new TypedData(z, type),
+            ]);
+        }
     }
 
     /** The `x` component of the vector */
@@ -180,13 +273,20 @@ export class Vector2 extends Vector {
      * @param w The `w` component value of the vector.
      * @param type The type of each components value of the vector.
      */
-    constructor(x: number, y: number, z: number, w: number, type: DataType) {
-        super([
-            new TypedData(x, type), 
-            new TypedData(y, type),
-            new TypedData(z, type),
-            new TypedData(w, type),
-        ]);
+    constructor(x: number | TypedData[], y?: number, z?: number, w?: number, type?: DataType) {
+        if(Array.isArray(x)) {
+            super(x);
+        } else {
+            if(y === undefined || z === undefined || w === undefined || type === undefined) {
+                throw new Error("You need to provide the Y value, Z value, W value and the type!");
+            }
+            super([
+                new TypedData(x, type), 
+                new TypedData(y, type),
+                new TypedData(z, type),
+                new TypedData(w, type),
+            ]);
+        }
     }
 
     /** The `x` component of the vector */

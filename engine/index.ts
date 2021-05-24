@@ -6,6 +6,7 @@ import Shader from "./Graphics/Shader.js";
 import { Vertex } from "./Graphics/Vertex.js";
 import { Vector2, Vector3, Vector4 } from "./Math/Vector.js";
 import { DataType } from "./Core/types.js";
+import { Matrix, Matrix4x4 } from "./Math/Matrix.js";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 
@@ -37,7 +38,7 @@ async function setup() {
     const indices = [
         new Indices(new Vector3(0, 1, 2, DataType.u8)),
         new Indices(new Vector3(0, 2, 3, DataType.u8)),
-    ]
+    ];
 
     const shader = await Shader.loadFrom("shaders/simple.vert", "shaders/simple.frag");
     const mesh = new Mesh(vertices, indices, shader);
