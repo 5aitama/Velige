@@ -6,6 +6,7 @@ import Shader from "./Graphics/Shader.js";
 import { Vertex } from "./Graphics/Vertex.js";
 import { Vector2, Vector3, Vector4 } from "./Math/Vector.js";
 import { DataType } from "./Core/types.js";
+import Material from "./Graphics/Material.js";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 
@@ -40,7 +41,8 @@ async function setup() {
     ];
 
     const shader = await Shader.loadFrom("shaders/simple.vert", "shaders/simple.frag");
-    const mesh = new Mesh(vertices, indices, shader);
+    const material = new Material(shader);
+    const mesh = new Mesh(vertices, indices, material);
     renderer.addMesh(mesh);
 
     window.onkeydown = (ev: KeyboardEvent) => {
