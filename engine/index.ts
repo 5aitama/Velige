@@ -77,5 +77,4 @@ function render(time = 0) {
     requestAnimationFrame(render);
 }
 
-setup();
-requestAnimationFrame(render);
+setup().then(() => requestAnimationFrame(render));
