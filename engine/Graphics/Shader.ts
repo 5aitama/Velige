@@ -89,8 +89,10 @@ export enum ShaderType {
         // Check if shader is not compiled successfully
         if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS))
         {
-            gl.deleteShader(shader)
-            throw new Error('An error occurred when compiling the shaders: ' + gl.getShaderInfoLog(shader))
+            let msg = gl.getShaderInfoLog(shader);
+            gl.deleteShader(shader);
+
+            throw new Error('An error occurred when compiling the shaders: ' + msg)
         }
 
         return shader

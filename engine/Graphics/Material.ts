@@ -1,6 +1,6 @@
 import TypedData from "../Core/TypedData";
 import { DataType } from "../Core/types";
-import { Matrix } from "../Math/Matrix";
+import { Matrix, Matrix4x4 } from "../Math/Matrix";
 import { Vector } from "../Math/Vector";
 import Shader from "./Shader";
 
@@ -108,6 +108,8 @@ export default class Material {
         this._shader.use(gl);
         for(const key in this._uniforms) {
             if(this._uniforms[key].needUpdate) {
+                
+                this._uniforms[key].needUpdate = false;
 
                 if(this._uniforms[key].location === undefined) {
                     const location = gl.getUniformLocation(this._shader.program!, key);
@@ -162,13 +164,12 @@ export default class Material {
     public setUniform<V extends Vector>(name: string, vector: V): void;
 
     public setUniform<T extends Vector | Matrix<Vector>>(name: string, vector: T) {
-        
         if(this._uniforms[name]) {
             this._uniforms[name].value = vector.data;
             this._uniforms[name].needUpdate = true;
         } else {
             this._uniforms[name] = {
-                size: vector.data.length,
+                size: vector instanceof Matrix ? vector.width : vector.data.length,
                 value: vector.data,
                 needUpdate: true,
                 location: undefined,

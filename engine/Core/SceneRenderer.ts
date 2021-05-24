@@ -145,4 +145,14 @@ export default class SceneRenderer {
             );
         }
     }
+
+    /** The renderer canvas width */
+    get width() {
+        return this._canvas.clientWidth;
+    }
+
+    /** The renderer canvas height */
+    get height() {
+        return this._canvas.clientHeight;
+    }
 }

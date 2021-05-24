@@ -1,7 +1,7 @@
 import ISized from "../Core/ISized";
 import TypedData from "../Core/TypedData";
 import { DataType } from "../Core/types";
-import { Vector, Vector3, Vector4 } from "./Vector";
+import { Vector, Vector2, Vector3, Vector4 } from "./Vector";
 
 /**
  * The base class of all `Matrix` classes.
@@ -206,7 +206,7 @@ export class Matrix4x4 extends Matrix<Vector4> {
      * @param type The type of each matrix data.
      * @returns A 4x4 identity matrix.
      */
-     identity(type: DataType) {
+    static identity(type: DataType) {
         return new Matrix4x4([
             1, 0, 0, 0,
             0, 1, 0, 0,
@@ -241,11 +241,46 @@ export class Matrix4x4 extends Matrix<Vector4> {
      * @param type The type of each matrix data.
      * @returns A 3x3 identity matrix.
      */
-    identity(type: DataType) {
+    static identity(type: DataType) {
         return new Matrix3x3([
             1, 0, 0,
             0, 1, 0,
             0, 0, 1,
         ], type);
+    }
+
+    static rotation(angle: number, type = DataType.f32) {
+        const c = Math.cos(angle);
+        const s = Math.sin(angle);
+
+        return new Matrix3x3([
+            c, -s, 0,
+            s, c, 0,
+            0, 0, 1,
+        ], type);
+    }
+
+    static translation(t: Vector2) {
+        return new Matrix3x3([
+            1, 0, 0,
+            0, 1, 0,
+            t.x, t.y, 1,
+        ], t.type);
+    }
+
+    static scaling(s: Vector2) {
+        return new Matrix3x3([
+            s.x, 0, 0,
+            0, s.y, 0,
+            0, 0, 1,
+        ], s.type);
+    }
+
+    static projection(width: number, height: number) {
+        return new Matrix3x3([
+            2 / width, 0, 0,
+            0, 2 / height, 0,
+            1, 1, 1,
+        ], DataType.f32);
     }
 }

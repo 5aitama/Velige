@@ -4,9 +4,12 @@ attribute vec4 vcol; // Vertex color
 
 varying vec4 col;
 
-uniform vec2 position;
+uniform mat3 projection;    // The projection matrix
+uniform mat3 view;          // The view matrix.
+uniform mat3 model;         // The model matrix.
 
 void main(void) {
-    col = vcol;
-    gl_Position = vec4(vpos + position, 0, 1);
+    col = vec4(1, vpos.y / 100.0, 1, 1);
+    vec3 pos = projection * view * model * vec3(vpos, 1);
+    gl_Position = vec4(pos.xy, 0, 1);
 }
