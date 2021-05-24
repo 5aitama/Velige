@@ -3,6 +3,8 @@ import IndicesBuffer from "../Graphics/IndicesBuffer";
 import { Mesh } from "../Graphics/Mesh";
 import { VertexAttribute } from "../Graphics/Vertex";
 import VertexBuffer from "../Graphics/VertexBuffer";
+import { Vector2 } from "../Math/Vector";
+import { DataType } from "./types";
 
 /**
  * Data that we need to render a mesh.
@@ -154,5 +156,10 @@ export default class SceneRenderer {
     /** The renderer canvas height */
     get height() {
         return this._canvas.clientHeight;
+    }
+
+    /** The renderer canvas width and height */
+    get size() {
+        return new Vector2(this.width, this.height, DataType.u32);
     }
 }

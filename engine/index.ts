@@ -20,9 +20,15 @@ async function setup() {
     const indices: Indices[] = [];
 
     const radius = 100;
-    const resolution = 60;
+    const resolution = 40;
     const steps = 360 / resolution;
     const deg2rad = Math.PI / 180;
+
+    const colors = [
+        new Vector4(1, 0, 0, 1, DataType.f32),
+        new Vector4(0, 1, 0, 1, DataType.f32),
+        new Vector4(0, 0, 1, 1, DataType.f32),
+    ];
 
     // Push the origin vertex of our circle.
     vertices.push(new Vertex([
@@ -36,7 +42,7 @@ async function setup() {
 
         vertices.push(new Vertex([
             new Vector2(x, y, DataType.f32),        // The position.
-            new Vector4(1, y / radius, 1, 1, DataType.f32),  // The color.
+            colors[Math.floor(j / 13) % colors.length],//new Vector4(1, y / radius, 1, 1, DataType.f32),  // The color.
         ]));
 
         if(j === 0) continue;
@@ -52,6 +58,7 @@ async function setup() {
 
     const shader = await Shader.loadFrom("shaders/simple.vert", "shaders/simple.frag");
     material = new Material(shader);
+    
     const mesh = new Mesh(vertices, indices, material);
     renderer.addMesh(mesh);
 
@@ -69,16 +76,18 @@ async function setup() {
 }
 
 function render(t = 0) {
-    t = t / 1000;
+    const slow = t / 1000;
+    const fast = t / 100;
 
-    const projection = Matrix3x3.projection(renderer.width, renderer.height);
+    const size = renderer.size;
+    const projection = Matrix3x3.projection(size.x, size.y);
 
     const mpos = new Vector2(0, 0, DataType.f32);
-    const mscl = new Vector2(1, 1, DataType.f32);
-    const mrot = 0;
+    const mscl = new Vector2(Math.sin(slow) / 5 + 1, Math.sin(slow) / 5 + 1, DataType.f32);
+    const mrot = fast;
     const model = Matrix3x3.mul(Matrix3x3.mul(Matrix3x3.translation(mpos), Matrix3x3.rotation(mrot)), Matrix3x3.scaling(mscl));
 
-    const vpos = new Vector2(-renderer.width / 2, -renderer.height / 2, DataType.f32);
+    const vpos = new Vector2(-size.x / 2, -size.y / 2, DataType.f32);
     const vscl = new Vector2(1, 1, DataType.f32);
     const vrot = 0;
     const view = Matrix3x3.mul(Matrix3x3.mul(Matrix3x3.translation(vpos), Matrix3x3.rotation(vrot)), Matrix3x3.scaling(vscl));

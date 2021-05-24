@@ -249,7 +249,7 @@ export class Matrix4x4 extends Matrix<Vector4> {
         ], type);
     }
 
-    static rotation(angle: number, type = DataType.f32) {
+    static rotation(angle: number) {
         const c = Math.cos(angle);
         const s = Math.sin(angle);
 
@@ -257,7 +257,7 @@ export class Matrix4x4 extends Matrix<Vector4> {
             c, -s, 0,
             s, c, 0,
             0, 0, 1,
-        ], type);
+        ], DataType.f32);
     }
 
     static translation(t: Vector2) {

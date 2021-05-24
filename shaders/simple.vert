@@ -9,7 +9,7 @@ uniform mat3 view;          // The view matrix.
 uniform mat3 model;         // The model matrix.
 
 void main(void) {
-    col = vec4(1, vpos.y / 100.0, 1, 1);
+    col = vcol;
     vec3 pos = projection * view * model * vec3(vpos, 1);
     gl_Position = vec4(pos.xy, 0, 1);
 }
