@@ -4,10 +4,9 @@ import { Indices } from "./Graphics/Indices.js";
 import { Mesh } from "./Graphics/Mesh.js";
 import Shader from "./Graphics/Shader.js";
 import { Vertex } from "./Graphics/Vertex.js";
-import { float2, float4, ubyte3, Vector2, Vector3, Vector4 } from "./Math/Vector.js";
-import { DataType } from "./Core/types.js";
+import { float2, float4, ubyte3 } from "./Math/Vector.js";
 import Material from "./Graphics/Material.js";
-import { Matrix3x3, Matrix4x4 } from "./Math/Matrix.js";
+import { Matrix3x3 } from "./Math/Matrix.js";
 import Transform from "./Core/Transform.js";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
@@ -17,21 +16,25 @@ const renderer = new SceneRenderer(canvas);
 let material: Material | null = null;
 
 async function setup() {
-    // The circle mesh vertices.
+    /** The circle mesh vertices. */
     const vertices: Vertex[] = [];
-    // The circle mesh indices.
+    
+    /** The circle mesh indices. */
     const indices: Indices[] = [];
 
-    // The circle radius.
+    /** The circle radius. */
     const radius     = 1;
-    // The circle resolution.
+
+    /** The circle resolution. */
     const resolution = 40;
-    // The angle offset between two vertex.
+
+    /** The angle offset between two vertex. */
     const steps      = 360 / resolution;
-    // Constant to convert degrees to radians.
+
+    /** Constant to convert degrees to radians. */
     const deg2rad    = Math.PI / 180;
 
-    // The different vertex color of the circle.
+    /** The different vertex color of the circle. */
     const colors = [
         new float4(1, 0, 0, 1), // Red
         new float4(0, 1, 0, 1), // Green
@@ -45,6 +48,7 @@ async function setup() {
     ]));
     
     for(let i = 0, j = 0; i <= 360; i += steps, j++) {
+
         const x = Math.sin(i * deg2rad) * radius;
         const y = Math.cos(i * deg2rad) * radius;
 
@@ -67,15 +71,8 @@ async function setup() {
     renderer.addMesh(mesh);
 
     window.onkeydown = (ev: KeyboardEvent) => {
-        if(ev.key === 'r') {
-            console.log("remove mesh");
-            renderer.removeMesh(mesh);
-        }
-
-        if(ev.key === 'a') {
-            console.log("add mesh");
-            renderer.addMesh(mesh);
-        }
+        if(ev.key === 'r') renderer.removeMesh(mesh);
+        if(ev.key === 'a') renderer.addMesh(mesh);
     }
 }
 
@@ -98,7 +95,7 @@ function render(t = 0) {
 
     // Render the current frame.
     renderer.render();
-    
+
     requestAnimationFrame(render);
 }
 
