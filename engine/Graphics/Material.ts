@@ -151,6 +151,13 @@ export default class Material {
     }
 
     /**
+     * Set an uniform value.
+     * @param name The name of the uniform value.
+     * @param value The value.
+     */
+    public setUniform(name: string, value: TypedData): void;
+
+    /**
      * Set an uniform matrix value.
      * @param name The name of the uniform matrix.
      * @param matrix The value.
@@ -169,14 +176,14 @@ export default class Material {
      * @param name The name of the uniform vector or matrix.
      * @param v The value.
      */
-    public setUniform<T extends Vector | Matrix<Vector>>(name: string, v: T) {
+    public setUniform<T extends Vector | Matrix<Vector> | TypedData>(name: string, v: T) {
         if(this._uniforms[name]) {
-            this._uniforms[name].value      = v.data;
+            this._uniforms[name].value      = (v instanceof TypedData) ? [v] : (v as Vector | Matrix<Vector>).data;
             this._uniforms[name].needUpdate = true;
         } else {
             this._uniforms[name] = {
-                size        : v instanceof Matrix ? v.width : v.data.length,
-                value       : v.data,
+                size        : v instanceof Matrix ? v.width : v instanceof TypedData ? 1 : (v as Vector).data.length,
+                value       : (v instanceof TypedData) ? [v] : (v as Vector | Matrix<Vector>).data,
                 needUpdate  : true,
                 location    : undefined,
                 type        : v.type,

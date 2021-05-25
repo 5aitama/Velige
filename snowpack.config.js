@@ -7,6 +7,7 @@ module.exports = {
     /* ... */
     'web': "/",
     'engine': "/",
+    'exemples': "/",
     'shaders': "/shaders"
   },
   plugins: [
