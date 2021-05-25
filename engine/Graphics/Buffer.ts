@@ -77,21 +77,27 @@ export default class Buffer {
     }
 
     /**
-     * Initialize the buffer with some data.
+     * Initialize the buffer with some data. if the buffer is
+     * already initialized, this function destroy
+     * the old buffer and create new one.
      * @param gl The context.
      * @param data The buffer data.
      */
     initBuffer(gl: WebGLRenderingContext, data: BufferSource) : void;
 
     /**
-     * Initialize the buffer with specified size.
+     * Initialize the buffer with specified size. if the buffer is
+     * already initialized, this function destroy
+     * the old buffer and create new one.
      * @param gl The context.
      * @param size The buffer size *(in bytes)*
      */
     initBuffer(gl: WebGLRenderingContext, size: number): void;
 
     /**
-     * Initialize the buffer with specified size.
+     * Initialize the buffer with specified size. if the buffer is
+     * already initialized, this function destroy
+     * the old buffer and create new one.
      * @param gl The context.
      * @param type The type of each data element.
      * @param count The amount of element.
@@ -99,7 +105,9 @@ export default class Buffer {
     initBuffer(gl: WebGLRenderingContext, type: DataType, count: number): void;
 
     /**
-     * Initialize the buffer.
+     * Initialize the buffer. if the buffer is
+     * already initialized, this function destroy
+     * the old buffer and create new one.
      * @param gl The context.
      * @param data The buffer data.
      * @param count The buffer data amount.
