@@ -8,6 +8,7 @@ import { float2, float4, ubyte3 } from "./Math/Vector.js";
 import Material from "./Graphics/Material.js";
 import { Matrix3x3 } from "./Math/Matrix.js";
 import Transform from "./Core/Transform.js";
+import World, { Entity, TestComponentA, TestComponentB } from "./ECS/World.js";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 
@@ -74,6 +75,15 @@ async function setup() {
         if(ev.key === 'r') renderer.removeMesh(mesh);
         if(ev.key === 'a') renderer.addMesh(mesh);
     }
+
+    const world = new World(2);
+    const entityA = world.createEntity();
+    const entityB = world.createEntity();
+
+    world.addComponent(entityB, new TestComponentB());
+    world.addComponent(entityA, new TestComponentA());
+
+    // console.log(world.entityWithAll([TestComponentA, TestComponentB]));
 }
 
 function render(t = 0) {
