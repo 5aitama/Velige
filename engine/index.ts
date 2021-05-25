@@ -8,6 +8,7 @@ import { Vector2, Vector3, Vector4 } from "./Math/Vector.js";
 import { DataType } from "./Core/types.js";
 import Material from "./Graphics/Material.js";
 import { Matrix3x3, Matrix4x4 } from "./Math/Matrix.js";
+import Transform from "./Core/Transform.js";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 
@@ -41,8 +42,8 @@ async function setup() {
         const y = Math.cos(i * deg2rad) * radius;
 
         vertices.push(new Vertex([
-            new Vector2(x, y, DataType.f32),        // The position.
-            colors[Math.floor(j / 13) % colors.length],//new Vector4(1, y / radius, 1, 1, DataType.f32),  // The color.
+            new Vector2(x, y, DataType.f32),            // The position.
+            colors[Math.floor(j / 13) % colors.length], // The color.
         ]));
 
         if(j === 0) continue;
@@ -82,19 +83,21 @@ function render(t = 0) {
     const size = renderer.size;
     const projection = Matrix3x3.projection(size.x, size.y);
 
-    const mpos = new Vector2(0, 0, DataType.f32);
-    const mscl = new Vector2(Math.sin(slow) / 5 + 1, Math.sin(slow) / 5 + 1, DataType.f32);
-    const mrot = fast;
-    const model = Matrix3x3.mul(Matrix3x3.mul(Matrix3x3.translation(mpos), Matrix3x3.rotation(mrot)), Matrix3x3.scaling(mscl));
+    const sphereTransform = new Transform(
+        new Vector2(0, 0, DataType.f32),
+        fast,
+        new Vector2(1, 1, DataType.f32)
+    );
 
-    const vpos = new Vector2(-size.x / 2, -size.y / 2, DataType.f32);
-    const vscl = new Vector2(1, 1, DataType.f32);
-    const vrot = 0;
-    const view = Matrix3x3.mul(Matrix3x3.mul(Matrix3x3.translation(vpos), Matrix3x3.rotation(vrot)), Matrix3x3.scaling(vscl));
+    const cameraTransform = new Transform(
+        new Vector2(-size.x / 2, -size.y / 2, DataType.f32),
+        0,
+        new Vector2(1, 1, DataType.f32)
+    );
     
     material?.setUniform("projection", projection);
-    material?.setUniform("view", view);
-    material?.setUniform("model", model);
+    material?.setUniform("view", cameraTransform.TRS);
+    material?.setUniform("model", sphereTransform.TRS);
 
     renderer.render();
     requestAnimationFrame(render);
