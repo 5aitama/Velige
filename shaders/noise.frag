@@ -58,7 +58,7 @@ void main(void) {
     float mm = min(screen_size.x, screen_size.y);
     vec2 puv = (uv_coord.xy * screen_size.xy) / mm;
     vec3 col = 0.5 + 0.5 * cos(time + puv.xyx + vec3(0, 2, 4));
-    float n = (sumOctave(puv + position, 0.5) * 0.5 + 0.5) * (20.);//snoise(uv_coord * 2.0) * 0.5 + 0.5;
+    float n = (sumOctave(puv + position, 0.5) * 0.5 + 0.5) * (20. + zoom);//snoise(uv_coord * 2.0) * 0.5 + 0.5;
     n = fract(n);
     n = 1.0 - smoothstep(0.1, 0.1, n);
     vec3 colored = vec3(n, n, n) * col;
