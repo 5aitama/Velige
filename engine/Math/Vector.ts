@@ -321,3 +321,318 @@ export class Vector2 extends Vector {
      */
     set w(w) { this.updateDataItem(3, w) }
 }
+
+/**
+ * Represent a vector with two `f32` component.
+ */
+export class float2 extends Vector2 {
+    /**
+     * Create new instance of `float2`.
+     * @param x The x value.
+     * @param y The y value.
+     */
+    constructor(x: number, y: number) {
+        super(x, y, DataType.f32);
+    }
+}
+
+/**
+ * Represent a vector with two `u8` component.
+ */
+ export class ubyte2 extends Vector2 {
+    /**
+     * Create new instance of `ubyte2`.
+     * @param x The x value.
+     * @param y The y value.
+     */
+    constructor(x: number, y: number) {
+        super(x, y, DataType.u8);
+    }
+}
+
+/**
+ * Represent a vector with two `u16` component.
+ */
+ export class ushort2 extends Vector2 {
+    /**
+     * Create new instance of `ushort2`.
+     * @param x The x value.
+     * @param y The y value.
+     */
+    constructor(x: number, y: number) {
+        super(x, y, DataType.u16);
+    }
+}
+
+/**
+ * Represent a vector with two `u32` component.
+ */
+ export class uint2 extends Vector2 {
+    /**
+     * Create new instance of `uint2`.
+     * @param x The x value.
+     * @param y The y value.
+     */
+    constructor(x: number, y: number) {
+        super(x, y, DataType.u32);
+    }
+}
+
+/**
+ * Represent a vector with two `i8` component.
+ */
+ export class byte2 extends Vector2 {
+    /**
+     * Create new instance of `byte2`.
+     * @param x The x value.
+     * @param y The y value.
+     */
+    constructor(x: number, y: number) {
+        super(x, y, DataType.i8);
+    }
+}
+
+/**
+ * Represent a vector with two `i16` component.
+ */
+ export class short2 extends Vector2 {
+    /**
+     * Create new instance of `short2`.
+     * @param x The x value.
+     * @param y The y value.
+     */
+    constructor(x: number, y: number) {
+        super(x, y, DataType.i16);
+    }
+}
+
+/**
+ * Represent a vector with two `i32` component.
+ */
+ export class int2 extends Vector2 {
+    /**
+     * Create new instance of `int2`.
+     * @param x The x value.
+     * @param y The y value.
+     */
+    constructor(x: number, y: number) {
+        super(x, y, DataType.i32);
+    }
+}
+
+/**
+ * Represent a vector with three `f32` component.
+ */
+ export class float3 extends Vector3 {
+    /**
+     * Create new instance of `float2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+    */
+    constructor(x: number, y: number, z: number) {
+        super(x, y, z, DataType.f32);
+    }
+}
+
+/**
+ * Represent a vector with three `u8` component.
+ */
+ export class ubyte3 extends Vector3 {
+    /**
+     * Create new instance of `ubyte2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+    */
+    constructor(x: number, y: number, z: number) {
+        super(x, y, z, DataType.u8);
+    }
+}
+
+/**
+ * Represent a vector with three `u16` component.
+ */
+ export class ushort3 extends Vector3 {
+    /**
+     * Create new instance of `ushort2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+    */
+    constructor(x: number, y: number, z: number) {
+        super(x, y, z, DataType.u16);
+    }
+}
+
+/**
+ * Represent a vector with three `u32` component.
+ */
+ export class uint3 extends Vector3 {
+    /**
+     * Create new instance of `uint2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+    */
+    constructor(x: number, y: number, z: number) {
+        super(x, y, z, DataType.u32);
+    }
+}
+
+/**
+ * Represent a vector with three `i8` component.
+ */
+ export class byte3 extends Vector3 {
+    /**
+     * Create new instance of `byte2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+    */
+    constructor(x: number, y: number, z: number) {
+        super(x, y, z, DataType.i8);
+    }
+}
+
+/**
+ * Represent a vector with three `i16` component.
+ */
+ export class short3 extends Vector3 {
+    /**
+     * Create new instance of `short2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+    */
+    constructor(x: number, y: number, z: number) {
+        super(x, y, z, DataType.i16);
+    }
+}
+
+/**
+ * Represent a vector with three `i32` component.
+ */
+ export class int3 extends Vector3 {
+    /**
+     * Create new instance of `int2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+    */
+    constructor(x: number, y: number, z: number) {
+        super(x, y, z, DataType.i32);
+    }
+}
+
+/**
+ * Represent a vector with four `f32` component.
+ */
+ export class float4 extends Vector4 {
+    /**
+     * Create new instance of `float2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+     * @param w The w value.
+    */
+    constructor(x: number, y: number, z: number, w: number) {
+        super(x, y, z, w, DataType.f32);
+    }
+}
+
+/**
+ * Represent a vector with four `u8` component.
+ */
+ export class ubyte4 extends Vector4 {
+    /**
+     * Create new instance of `ubyte2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+     * @param w The w value.
+    */
+    constructor(x: number, y: number, z: number, w: number) {
+        super(x, y, z, w, DataType.u8);
+    }
+}
+
+/**
+ * Represent a vector with four `u16` component.
+ */
+ export class ushort4 extends Vector4 {
+    /**
+     * Create new instance of `ushort2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+     * @param w The w value.
+    */
+    constructor(x: number, y: number, z: number, w: number) {
+        super(x, y, z, w, DataType.u16);
+    }
+}
+
+/**
+ * Represent a vector with four `u32` component.
+ */
+ export class uint4 extends Vector4 {
+    /**
+     * Create new instance of `uint2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+     * @param w The w value.
+    */
+    constructor(x: number, y: number, z: number, w: number) {
+        super(x, y, z, w, DataType.u32);
+    }
+}
+
+/**
+ * Represent a vector with four `i8` component.
+ */
+ export class byte4 extends Vector4 {
+    /**
+     * Create new instance of `byte2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+     * @param w The w value.
+    */
+    constructor(x: number, y: number, z: number, w: number) {
+        super(x, y, z, w, DataType.i8);
+    }
+}
+
+/**
+ * Represent a vector with four `i16` component.
+ */
+ export class short4 extends Vector4 {
+    /**
+     * Create new instance of `short2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+     * @param w The w value.
+    */
+    constructor(x: number, y: number, z: number, w: number) {
+        super(x, y, z, w, DataType.i16);
+    }
+}
+
+/**
+ * Represent a vector with four `i32` component.
+ */
+ export class int4 extends Vector4 {
+    /**
+     * Create new instance of `int2`.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value. 
+     * @param w The w value.
+    */
+    constructor(x: number, y: number, z: number, w: number) {
+        super(x, y, z, w, DataType.i32);
+    }
+}
