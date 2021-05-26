@@ -9,7 +9,10 @@ html, body {
 
 #canvas {
     width: -webkit-calc(100% - 80px - 2px);
+    width: calc(100% - 80px - 2px);
+
     height: -webkit-calc(100% - 80px - 2px);
+    height: calc(100% - 80px - 2px);
 
     border-radius: 5px;
     margin: 40px;

@@ -61,14 +61,16 @@ export default class SceneRenderer {
     onResize() {
 
         const dpr = window.devicePixelRatio;
-        const displayWidth  = Math.round(this._canvas.clientWidth * dpr);
-        const displayHeight = Math.round(this._canvas.clientHeight * dpr);
+        const w = Math.round(this._canvas.clientWidth * dpr);
+        const h = Math.round(this._canvas.clientHeight * dpr);
 
-        const needResize = this._canvas.width  != displayWidth || this._canvas.height != displayHeight;
+        const needResize = this._canvas.width  != w || this._canvas.height != h;
  
         if (needResize) {
-            this._canvas.width  = displayWidth;
-            this._canvas.height = displayHeight;
+            this._canvas.width = w;
+            this._canvas.height = h;
+
+            this._gl.viewport(0, 0, this._canvas.width, this._canvas.height);
         }
     }
 
@@ -135,7 +137,6 @@ export default class SceneRenderer {
     }
 
     render() {
-        this._gl.viewport(0, 0, this._canvas.width, this._canvas.height);
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
         this._gl.clearColor(0.1, 0.1, 0.1, 1);
 
