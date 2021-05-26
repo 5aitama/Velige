@@ -13,6 +13,18 @@ export enum DrawMode {
     LineLoop = WebGLRenderingContext['LINE_LOOP'],
 }
 
+export enum BufferUpdateMode {
+    None = 0,
+    All = 1, 
+    Keep = 2,
+};
+
+export interface IBufferUpdateInfos {
+    mode: BufferUpdateMode,
+    offset: number,
+    length: number,
+}
+
 /**
  * Represent a Mesh.
  */
@@ -28,6 +40,9 @@ export class Mesh {
 
     /** How to draw the geometry from the indices. */
     private _drawMode: DrawMode = DrawMode.Triangle;
+
+    private _vertexBufferUpdateInfos: IBufferUpdateInfos[] = [];
+    private _indexBufferUpdateInfos: IBufferUpdateInfos[] = [];
 
     /**
      * Create new instance of `Mesh`.
@@ -63,4 +78,63 @@ export class Mesh {
         return this._drawMode;
     }
 
+    /** The vertex buffer update infos. */
+    get vertexBufferUpdateInfos() {
+        return this._vertexBufferUpdateInfos;
+    }
+
+    /** The index buffer update infos. */
+    get indexBufferUpdateInfos() {
+        return this._indexBufferUpdateInfos;
+    }
+
+    /** @param vertices The new vertices */
+    set vertices(vertices) {
+        this._vertices = vertices;
+        this._vertexBufferUpdateInfos.push({
+            mode: BufferUpdateMode.All,
+            offset: 0,
+            length: vertices.length,
+        });
+    }
+
+    /** @param indices The new indices */
+    set indices(indices) {
+        this._indices = indices;
+        this._indexBufferUpdateInfos.push({
+            mode: BufferUpdateMode.All,
+            offset: 0,
+            length: indices.length,
+        });
+    }
+
+    /**
+     * Update the mesh vertices. *The new vertices must be have
+     * the same type as the old vertices.*
+     * @param vertices The new vertices.
+     * @param offset Where we need to put the new vertices
+     */
+    updateVertices(vertices: Vertex[], offset: number = 0) {
+        this._vertices.splice(offset, vertices.length, ...vertices);
+        this._vertexBufferUpdateInfos.push({
+            mode: BufferUpdateMode.Keep,
+            offset: offset,
+            length: vertices.length,
+        });
+    }
+
+    /**
+     * Update the mesh indices. *The new indices must be have
+     * the same type as the old indices!*
+     * @param indices The new indices.
+     * @param offset Where we need to put the new indices
+     */
+    updateIndices(indices: Indices[], offset: number = 0) {
+        this._indices.splice(offset, indices.length, ...indices);
+        this._indexBufferUpdateInfos.push({
+            mode: BufferUpdateMode.All,
+            offset: offset,
+            length: indices.length,
+        });
+    }
 }

@@ -37,23 +37,23 @@ import { setTypedData } from "../Core/DataViewUtils";
      * the vertex that was modified.
      * @param index The index of the vertex that was modified.
      */
-    updateBufferData(index: number): void;
+    updateBufferData(index: number, length: number): void;
 
     /**
      * Updates several parts of the buffer according 
      * to the indices that have been modified.
      * @param indices The index of the indices that was modified.
      */
-    updateBufferData(indices: number[]): void;
+    updateBufferData(indices: number[], lengths: number[]): void;
 
     /**
      * Update the buffer data.
      */
-    updateBufferData(index?: number | number[]) {
+    updateBufferData(index?: number | number[], length?: number | number[]) {
         if(index !== undefined) {
             if(Array.isArray(index)) {
                 for(let i = 0; i < index.length; i++) {
-                    this.updateBufferData(index[i]);
+                    this.updateBufferData(index[i], (length as number[])[i]);
                 }
             } else {
                 const size = this._indices[0].size;
@@ -64,8 +64,10 @@ import { setTypedData } from "../Core/DataViewUtils";
 
                 let dataOffset = offset;
 
-                for(let i = 0; i < this._indices[index].indices.data.length; i++) {
-                    dataOffset += setTypedData(dataOffset, this._indices[index].indices.data[i], view);
+                for(let k = 0; k < (length as number); k++) {
+                    for(let i = 0; i < this._indices[index + k].indices.data.length; i++) {
+                        dataOffset += setTypedData(dataOffset, this._indices[index + k].indices.data[i], view);
+                    }
                 }
 
                 this._buffer.updateBufferData(this._gl, offset, bufferArray);
