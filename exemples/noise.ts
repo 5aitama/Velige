@@ -49,7 +49,6 @@ async function setup() {
         if(e.key === 's') key_d = true;
         if(e.key === 'e') key_zz = true;
         if(e.key === 'q') key_dz = true;
-
     });
 
     window.addEventListener("keyup", (e) => {
@@ -59,7 +58,6 @@ async function setup() {
         if(e.key === 's') key_d = false;
         if(e.key === 'e') key_zz = false;
         if(e.key === 'q') key_dz = false;
-
     });
 }
 
@@ -74,7 +72,7 @@ function render(t = 0) {
     if(key_zz) { current_zoom += 1.5 * deltaTime }
     if(key_dz) { current_zoom -= 1.5 * deltaTime }
     
-    material?.setUniform("time", new TypedData(t / 800, DataType.f32));
+    // material?.setUniform("time", new TypedData(t / 800, DataType.f32));
     material?.setUniform("zoom", new TypedData(current_zoom, DataType.f32));
     material?.setUniform("position", current_pos);
     material?.setUniform("screen_size", new float2(renderer.size.x, renderer.size.y));
