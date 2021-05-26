@@ -5,7 +5,7 @@ import { DataType, sizeOfDataType } from "./types";
  * is good to do that but it's very usefull
  * especially to do GPU things.
  */
-export default class TypedData {
+export class TypedData {
     /** The `TypedData` value. */
     private _value: number;
     

@@ -1,4 +1,4 @@
-import ISized from "../Core/ISized";
+import { ISized } from "../Core/ISized";
 import { Vector3 } from "../Math/Vector";
 
 /**

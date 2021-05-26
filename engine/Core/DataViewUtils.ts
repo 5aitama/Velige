@@ -1,5 +1,5 @@
 import { DataType } from "./types";
-import TypedData from "./TypedData";
+import { TypedData } from "./TypedData";
 
 /**
  * Set a `TypedData` into a `DataView`.

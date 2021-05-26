@@ -2,6 +2,7 @@ import { Indices } from "./Indices";
 import Buffer from "./Buffer";
 import { BufferTarget, BufferUsage } from "./Buffer";
 import { setTypedData } from "../Core/DataViewUtils";
+// import { IMeshBuffer } from "./IMeshBuffer";
 
 /**
  * Class that help us to transform

@@ -1,8 +1,8 @@
-import TypedData from "../Core/TypedData";
+import { TypedData } from "../Core/TypedData";
 import { DataType } from "../Core/types";
 import { Matrix, Matrix4x4 } from "../Math/Matrix";
 import { Vector } from "../Math/Vector";
-import Shader from "./Shader";
+import { Shader } from "./Shader";
 
 /**
  * Represent a shader uniform data.
@@ -27,7 +27,7 @@ export interface IUniformData {
     isMatrix: boolean,
 }
 
-export default class Material {
+export class Material {
 
     /** The material shader. */
     private _shader: Shader;

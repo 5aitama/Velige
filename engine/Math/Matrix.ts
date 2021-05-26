@@ -1,5 +1,5 @@
-import ISized from "../Core/ISized";
-import TypedData from "../Core/TypedData";
+import { ISized } from "../Core/ISized";
+import { TypedData } from "../Core/TypedData";
 import { DataType } from "../Core/types";
 import { Vector, Vector2, Vector3, Vector4 } from "./Vector";
 

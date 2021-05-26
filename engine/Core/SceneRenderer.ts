@@ -23,7 +23,7 @@ export interface IMeshRenderData {
 /**
  * The scene renderer.
  */
-export default class SceneRenderer {
+export class SceneRenderer {
     /** The canvas where we render things */
     private _canvas: HTMLCanvasElement;
 

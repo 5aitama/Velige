@@ -2,6 +2,7 @@ import { setTypedData } from "../Core/DataViewUtils";
 import { BufferTarget, BufferUsage } from "./Buffer";
 import Buffer from "./Buffer";
 import { Vertex } from "./Vertex";
+// import { IMeshBuffer } from "./IMeshBuffer";
 
 /**
  * Class that help us to transform

@@ -3,7 +3,7 @@
  * the size *(in bytes)* of all classes
  * that implement it.
  */
-export default interface ISized {
+export interface ISized {
     /** The object size *(in bytes) */
     readonly size: number;
 }
