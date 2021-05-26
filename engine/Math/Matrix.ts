@@ -249,6 +249,11 @@ export class Matrix4x4 extends Matrix<Vector4> {
         ], type);
     }
 
+    /**
+     * Create a `Matrix3x3` that store a rotation.
+     * @param angle The angle (in radians)
+     * @returns The rotation matrix.
+     */
     static rotation(angle: number) {
         const c = Math.cos(angle);
         const s = Math.sin(angle);
@@ -260,6 +265,11 @@ export class Matrix4x4 extends Matrix<Vector4> {
         ], DataType.f32);
     }
 
+    /**
+     * Create a `Matrix3x3` that store a translation.
+     * @param t The translation.
+     * @returns The translation matrix.
+     */
     static translation(t: Vector2) {
         return new Matrix3x3([
             1, 0, 0,
@@ -268,6 +278,11 @@ export class Matrix4x4 extends Matrix<Vector4> {
         ], t.type);
     }
 
+    /**
+     * Create a `Matrix3x3` that store a scale.
+     * @param s The scale.
+     * @returns The scale matrix.
+     */
     static scaling(s: Vector2) {
         return new Matrix3x3([
             s.x, 0, 0,
@@ -276,6 +291,12 @@ export class Matrix4x4 extends Matrix<Vector4> {
         ], s.type);
     }
 
+    /**
+     * Create a `Matrix3x3` that store a projection.
+     * @param width The screen width
+     * @param height The screen height
+     * @returns The projection matrix.
+     */
     static projection(width: number, height: number) {
         return new Matrix3x3([
             2 / width, 0, 0,
