@@ -10,6 +10,7 @@ import { float2, ubyte3 } from "../engine/Math/Vector";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const renderer = new SceneRenderer(canvas);
+
 let material : Material | undefined;
 let current_pos = new float2(0, 0);
 let current_zoom = 0;

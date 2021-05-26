@@ -59,14 +59,16 @@ export default class SceneRenderer {
      * canvas and the viewport of the context.
      */
     onResize() {
-        const w = this._canvas.clientWidth;
-        const h = this._canvas.clientHeight;
 
-        if(this._canvas.width !== w || this._canvas.height !== h) {
-            this._canvas.width = w;
-            this._canvas.height = h;
+        const dpr = window.devicePixelRatio;
+        const displayWidth  = Math.round(this._canvas.clientWidth * dpr);
+        const displayHeight = Math.round(this._canvas.clientHeight * dpr);
 
-            this._gl.viewport(0, 0, this._canvas.width, this._canvas.height);
+        const needResize = this._canvas.width  != displayWidth || this._canvas.height != displayHeight;
+ 
+        if (needResize) {
+            this._canvas.width  = displayWidth;
+            this._canvas.height = displayHeight;
         }
     }
 
@@ -133,6 +135,7 @@ export default class SceneRenderer {
     }
 
     render() {
+        this._gl.viewport(0, 0, this._canvas.width, this._canvas.height);
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
         this._gl.clearColor(0.1, 0.1, 0.1, 1);
 
@@ -150,12 +153,12 @@ export default class SceneRenderer {
 
     /** The renderer canvas width */
     get width() {
-        return this._canvas.clientWidth;
+        return this._canvas.width;
     }
 
     /** The renderer canvas height */
     get height() {
-        return this._canvas.clientHeight;
+        return this._canvas.height;
     }
 
     /** The renderer canvas width and height */
