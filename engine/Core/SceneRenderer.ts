@@ -1,6 +1,6 @@
 import { BufferUsage } from "../Graphics/Buffer";
 import IndicesBuffer from "../Graphics/IndicesBuffer";
-import { Mesh } from "../Graphics/Mesh";
+import { BufferUpdateMode, Mesh } from "../Graphics/Mesh";
 import { VertexAttribute } from "../Graphics/Vertex";
 import VertexBuffer from "../Graphics/VertexBuffer";
 import { Vector2 } from "../Math/Vector";
@@ -94,7 +94,7 @@ export default class SceneRenderer {
         const iBuffer = new IndicesBuffer(this._gl, mesh.indices, BufferUsage.Static);
 
         // Create the vertex buffer from the mesh vertices.
-        const vBuffer = new VertexBuffer(this._gl, mesh.vertices, BufferUsage.Static);
+        const vBuffer = new VertexBuffer(this._gl, mesh.vertices, BufferUsage.Dynamic);
 
         // Create the vertex attributes from the mesh vertices.
         const vAttribs = mesh.vertices[0].buildVertexAttributes();
@@ -136,11 +136,49 @@ export default class SceneRenderer {
         this.meshesRenderData.splice(index, 1);
     }
 
+    /**
+     * Check if we need to reallocate the mesh buffers.
+     * @param meshIndex The index of the mesh that we want to check.
+     */
+    private checkMeshBuffers(meshIndex: number) {
+        for(let i = 0; i < this.meshes[meshIndex].vertexBufferUpdateInfos.length; i++) {
+            switch(this.meshes[meshIndex].vertexBufferUpdateInfos[i].mode) {
+                case BufferUpdateMode.None: continue;
+                case BufferUpdateMode.All:
+                    this.meshesRenderData[meshIndex].vertexBuffer.updateBufferData();
+                    break;
+                case BufferUpdateMode.Keep:
+                    const offset = this.meshes[meshIndex].vertexBufferUpdateInfos[i].offset;
+                    const length = this.meshes[meshIndex].vertexBufferUpdateInfos[i].length;
+
+                    this.meshesRenderData[meshIndex].vertexBuffer.updateBufferData(offset, length);
+                    break;
+            }
+        }
+
+        for(let i = 0; i < this.meshes[meshIndex].indexBufferUpdateInfos.length; i++) {
+            switch(this.meshes[meshIndex].indexBufferUpdateInfos[i].mode) {
+                case BufferUpdateMode.None: continue;
+                case BufferUpdateMode.All:
+                    this.meshesRenderData[meshIndex].indexBuffer.updateBufferData();
+                    break;
+                case BufferUpdateMode.Keep:
+                    const offset = this.meshes[meshIndex].indexBufferUpdateInfos[i].offset;
+                    const length = this.meshes[meshIndex].indexBufferUpdateInfos[i].length;
+
+                    this.meshesRenderData[meshIndex].indexBuffer.updateBufferData(offset, length);
+                    break;
+            }
+        }
+
+    }
+
     render() {
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
         this._gl.clearColor(0.1, 0.1, 0.1, 1);
 
         for(let i = 0; i < this.meshes.length; i++) {
+            this.checkMeshBuffers(i);
             this.meshes[i].material.use(this._gl);
             this.meshesRenderData[i].indexBuffer.bindBuffer();
             this._gl.drawElements(

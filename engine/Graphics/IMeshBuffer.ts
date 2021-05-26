@@ -12,14 +12,14 @@ interface IMeshBuffer {
      * the data that was modified.
      * @param index The index of the data that was modified.
      */
-    updateBufferData(index: number): void;
+    updateBufferData(index: number, length: number): void;
 
     /**
      * Updates several parts of the buffer according 
      * to the data array that have been modified.
      * @param data The array of index of the data that was modified.
      */
-    updateBufferData(data: number[]): void;
+    updateBufferData(data: number[], lengths: number[]): void;
 
     /**
      * Put all data together into a single array. 

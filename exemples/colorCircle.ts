@@ -15,6 +15,7 @@ const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const renderer = new SceneRenderer(canvas);
 
 let material: Material | null = null;
+let mesh: Mesh | null = null;
 
 async function setup() {
     /** The circle mesh vertices. */
@@ -68,12 +69,12 @@ async function setup() {
     const shader = await Shader.loadFrom("shaders/simple.vert", "shaders/simple.frag");
     material = new Material(shader);
     
-    const mesh = new Mesh(vertices, indices, material);
+    mesh = new Mesh(vertices, indices, material);
     renderer.addMesh(mesh);
 
     window.onkeydown = (ev: KeyboardEvent) => {
-        if(ev.key === 'r') renderer.removeMesh(mesh);
-        if(ev.key === 'a') renderer.addMesh(mesh);
+        if(ev.key === 'r') renderer.removeMesh(mesh!);
+        if(ev.key === 'a') renderer.addMesh(mesh!);
     }
 
     const world = new World(2);
@@ -91,6 +92,14 @@ function render(t = 0) {
     const angle = t / 250;
 
     const size = renderer.size;
+
+    const v = [new Vertex([
+        new float2(Math.sin(t / 100) * .5, Math.cos(t / 100) * .5),
+        new float4(0, 0, 0, 1),
+    ])];
+
+    // Update the vertex at index 0 (the center of the circle...)
+    mesh?.updateVertices(v, 0);
     
     // The camera projection matrix.
     const projection = Matrix3x3.projection(size.x, size.y);

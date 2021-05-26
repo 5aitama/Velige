@@ -37,23 +37,23 @@ export default class VertexBuffer<T extends Vertex> implements IMeshBuffer {
      * the vertex that was modified.
      * @param index The index of the vertex that was modified.
      */
-    updateBufferData(index: number): void;
+     updateBufferData(index: number, length: number): void;
 
     /**
      * Updates several parts of the buffer according 
      * to the vertices that have been modified.
      * @param indices The index of the vertices that was modified.
      */
-    updateBufferData(indices: number[]): void;
+    updateBufferData(indices: number[], lengths: number[]): void;
 
     /**
      * Update the buffer data.
      */
-    updateBufferData(index?: number | number[]) {
+    updateBufferData(index?: number | number[], length?: number | number[]) {
         if(index !== undefined) {
             if(Array.isArray(index)) {
                 for(let i = 0; i < index.length; i++) {
-                    this.updateBufferData(index[i]);
+                    this.updateBufferData(index[i], (length as number[])[i]);
                 }
             } else {
                 const size = this._vertices[0].size;
@@ -63,10 +63,12 @@ export default class VertexBuffer<T extends Vertex> implements IMeshBuffer {
                 const view = new DataView(bufferArray);
 
                 let dataOffset = offset;
-
-                for(let i = 0; i < this._vertices[index].vectors.length; i++) {
-                    for(let j = 0; j < this._vertices[index].vectors[i].data.length; j++) {
-                        dataOffset += setTypedData(dataOffset, this._vertices[index].vectors[i].data[j], view);
+                
+                for(let k = 0; k < (length as number); k++) {
+                    for(let i = 0; i < this._vertices[index + k].vectors.length; i++) {
+                        for(let j = 0; j < this._vertices[index + k].vectors[i].data.length; j++) {
+                            dataOffset += setTypedData(dataOffset, this._vertices[index + k].vectors[i].data[j], view);
+                        }
                     }
                 }
 
