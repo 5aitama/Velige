@@ -1,6 +1,6 @@
 import { Indices } from "./Indices";
-import Material from "./Material";
-import Shader from "./Shader";
+import { Material } from "./Material";
+import { Shader } from "./Shader";
 import { Vertex } from "./Vertex";
 
 export enum DrawMode {

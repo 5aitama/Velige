@@ -12,7 +12,7 @@ export enum ShaderType {
 /**
  * A Shader.
  */
- export default class Shader 
+ export class Shader 
  {
     /** Vertex shader source code. */
     vertexSource: string;

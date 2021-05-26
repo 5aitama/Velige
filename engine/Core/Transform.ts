@@ -1,7 +1,7 @@
 import { Matrix3x3 } from "../Math/Matrix";
 import { Vector2 } from "../Math/Vector";
 
-export default class Transform {
+export class Transform {
 
     /** The transform position */
     private _position: Vector2;

@@ -1,14 +1,11 @@
 
-import SceneRenderer from "../engine/Core/SceneRenderer.js";
-import { Indices } from "../engine/Graphics/Indices.js";
-import { Mesh } from "../engine/Graphics/Mesh.js";
-import Shader from "../engine/Graphics/Shader.js";
-import { Vertex } from "../engine/Graphics/Vertex.js";
-import { float2, float4, ubyte3 } from "../engine/Math/Vector.js";
-import Material from "../engine/Graphics/Material.js";
-import { Matrix3x3 } from "../engine/Math/Matrix.js";
-import Transform from "../engine/Core/Transform.js";
-import World, { Entity, TestComponentA, TestComponentB } from "../engine/ECS/World.js";
+import World, { TestComponentB, TestComponentA } from "../engine/ECS/World";
+
+import { 
+    SceneRenderer, Transform, Shader, Material, 
+    Mesh, Vertex, Indices, float4, float2, ubyte3, 
+    DrawMode, Matrix3x3 
+} from "../engine/index";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 
@@ -28,7 +25,7 @@ async function setup() {
     const radius     = 1;
 
     /** The circle resolution. */
-    const resolution = 40;
+    const resolution = 24;
 
     /** The angle offset between two vertex. */
     const steps      = 360 / resolution;
@@ -56,7 +53,7 @@ async function setup() {
 
         vertices.push(new Vertex([
             new float2(x, y), // The position.
-            colors[Math.floor(j / 13) % colors.length], // The color.
+            colors[Math.floor(j / 8) % colors.length], // The color.
         ]));
 
         if(j === 0) continue;
@@ -69,7 +66,7 @@ async function setup() {
     const shader = await Shader.loadFrom("shaders/simple.vert", "shaders/simple.frag");
     material = new Material(shader);
     
-    mesh = new Mesh(vertices, indices, material);
+    mesh = new Mesh(vertices, indices, material, DrawMode.Triangle);
     renderer.addMesh(mesh);
 
     window.onkeydown = (ev: KeyboardEvent) => {
@@ -95,7 +92,7 @@ function render(t = 0) {
 
     const v = [new Vertex([
         new float2(Math.sin(t / 100) * .5, Math.cos(t / 100) * .5),
-        new float4(0, 0, 0, 1),
+        new float4(1, 0, 0, 1),
     ])];
 
     // Update the vertex at index 0 (the center of the circle...)

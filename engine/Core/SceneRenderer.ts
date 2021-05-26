@@ -1,4 +1,5 @@
 import { BufferUsage } from "../Graphics/Buffer";
+import { IMeshBuffer } from "../Graphics/IMeshBuffer";
 import IndicesBuffer from "../Graphics/IndicesBuffer";
 import { BufferUpdateMode, Mesh } from "../Graphics/Mesh";
 import { VertexAttribute } from "../Graphics/Vertex";
@@ -23,7 +24,7 @@ export interface IMeshRenderData {
 /**
  * The scene renderer.
  */
-export default class SceneRenderer {
+export class SceneRenderer {
     /** The canvas where we render things */
     private _canvas: HTMLCanvasElement;
 

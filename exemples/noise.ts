@@ -1,12 +1,8 @@
-import SceneRenderer from "../engine/Core/SceneRenderer";
-import TypedData from "../engine/Core/TypedData";
-import { DataType } from "../engine/Core/types";
-import { Indices } from "../engine/Graphics/Indices";
-import Material from "../engine/Graphics/Material";
-import { DrawMode, Mesh } from "../engine/Graphics/Mesh";
-import Shader from "../engine/Graphics/Shader";
-import { Vertex } from "../engine/Graphics/Vertex";
-import { float2, ubyte3 } from "../engine/Math/Vector";
+import { 
+    Material, SceneRenderer, float2, Shader, Vertex, Indices, 
+    ubyte3, Mesh, DrawMode, TypedData, DataType 
+} from "../engine/index";
+
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const renderer = new SceneRenderer(canvas);
