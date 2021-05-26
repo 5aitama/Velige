@@ -65,3 +65,8 @@ and voila ! when you save a file the browser automaticaly refresh and apply your
 
 ### Contributions
 You can contribute on this project. Free feel to you to create pull request !
+
+### Compatibility
+|   Chrome   |   Firefox  |   Safari  |
+|------------| ---------- | --------- |
+|   Yes ✅    |   Bug ⚠️    |  Yes ✅   |
