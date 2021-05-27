@@ -3,7 +3,7 @@ import IndicesBuffer from "../Graphics/IndicesBuffer";
 import { BufferUpdateMode, Mesh } from "../Graphics/Mesh";
 import { VertexAttribute } from "../Graphics/Vertex";
 import VertexBuffer from "../Graphics/VertexBuffer";
-import { Vector2 } from "../Math/Vector";
+import { float4, Vector2 } from "../Math/Vector";
 import { DataType } from "./types";
 
 /**
@@ -36,6 +36,9 @@ export class SceneRenderer {
     /** The render data of each meshes */
     private meshesRenderData: IMeshRenderData[] = [];
 
+    /** The render clear color */
+    private _clearColor: float4 = new float4(0.1, 0.1, 0.1, 1);
+
     /**
      * Create new instance of `SceneRenderer`.
      * @param canvas The canvas where we want to render.
@@ -52,6 +55,16 @@ export class SceneRenderer {
 
         window.onresize = () => this.onResize();
         this.onResize();
+    }
+
+    /** The render clear color */
+    get clearColor() {
+        return this._clearColor;
+    }
+
+    /** @param color The new render clear color */
+    set clearColor(color) {
+        this._clearColor = color;
     }
 
     /**
@@ -175,7 +188,13 @@ export class SceneRenderer {
 
     render() {
         this._gl.clear(this._gl.COLOR_BUFFER_BIT);
-        this._gl.clearColor(0.1, 0.1, 0.1, 1);
+
+        this._gl.clearColor(
+            this._clearColor.x, 
+            this._clearColor.y, 
+            this._clearColor.z, 
+            this._clearColor.w
+        );
 
         for(let i = 0; i < this.meshes.length; i++) {
             this.checkMeshBuffers(i);
